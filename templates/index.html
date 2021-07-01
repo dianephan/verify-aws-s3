@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css"
+  />
+  <!-- stuff for filepond below -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+  <script src="https://unpkg.com/filepond/dist/filepond.min.js"></script>
+  <script src="https://unpkg.com/jquery-filepond/filepond.jquery.js"></script>
+  <!-- end stuff for filepond -->
+
+  <h1>dsfkadsfasf</h1>
+
+</head>
+<!-- add to document <head> -->
+  <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet" />
+
+<body>         
+  <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
+
+  <div class="container">
+    <p>Enter your dfasfdsfasgdfdasfa number:</p>
+  </div>
+
+  <input type="file">
+  <script>
+    const inputElement = document.querySelector('input[type="file"]');
+    const pond = FilePond.create( inputElement );
+    FilePond.registerPlugin(
+      FilePondPluginImagePreview,
+      FilePondPluginImageExifOrientation,
+      FilePondPluginFileValidateSize,
+      FilePondPluginFileValidateType
+    );
+
+    // stuff for filepond here
+    $(function(){
+      $('.my-pond').filepond({
+        acceptedFileTypes: ['image/jpeg', 'video/mp4'],
+        fileValidateTypeLabelExpectedTypesMap: { 'image/jpeg': '.jpg', 'video/mp4': '.mp4' },
+        allowFileTypeValidation: true,
+        instantUpload: true,
+        labelIdle: 'Drag & Drop your fdsfsfds & video or <span class="filepond--label-action">Browse</span>',
+        maxFileSize: '100MB',
+        maxTotalFileSize: '100MB',
+        server: {
+          url: '/includes/ajax.asp',
+          process: {
+            url: '?Action=ProcessUpload',
+            onload: test
+          },
+          fetch: null,
+          revert: null
+        }
+      // // Turn input element into a pond
+      // $('.my-pond').filepond();
+
+      // // Turn input element into a pond with configuration options
+      // $('.my-pond').filepond({
+      //   allowMultiple: true
+      // });
+
+      // // Set allowMultiple property to true
+      // $('.my-pond').filepond('allowMultiple', false);
+
+      // // Listen for addfile event
+      // $('.my-pond').on('FilePond:addfile', function(e) {
+      //   console.log('file added event', e);
+      // });
+
+      // // Manually add a file using the addfile method
+      // $('.my-pond').filepond('addFile', 'index.html').then(function(file){
+      //   console.log('file added', file);
+      // });
+    });
+
+    $(function(){
+      $.fn.filepond.registerPlugin(FilePondPluginFileValidateSize);
+      $.fn.filepond.setDefaults({
+          maxFileSize: '3MB'
+      });
+    });
+
+    function test() {
+      console.log( FilePond.getFiles() );
+    }
+
+    FilePond.setOptions({
+      server: 'api/'
+    });
+
+    FilePond.setOptions({
+      server: 'http://192.168.33.10'
+    });
+  });
+
+  </script> 
+
+</body>
+</html>

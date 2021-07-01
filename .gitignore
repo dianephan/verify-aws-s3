@@ -1,0 +1,7 @@
+script.sql
+/venv
+__pycache__
+.env
+populate.py
+/uploads
+app.db

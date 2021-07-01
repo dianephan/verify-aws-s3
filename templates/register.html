@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- stuff from kelley's phone input here -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+
+    <!-- stuff for filepond below -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+    <script src="https://unpkg.com/filepond/dist/filepond.min.js"></script>
+    <script src="https://unpkg.com/jquery-filepond/filepond.jquery.js"></script>
+    <!-- end stuff for filepond -->
+
+    <h1>Register yourself</h1>
+    <p>
+      Please look up your coordinates on Google Maps! Keep in mind that you can
+      only register once and that you can set your coordinates in an area
+      nearest to your location to protect your privacy. In order to make sure
+      your picture shows up in the correct area, please enter the LATITUDE
+      first, then LONGITUDE!
+    </p>
+  </head>
+  <body>
+    <form method="POST">
+      <p>Enter your phone number:</p>
+      <input id="phone" type="tel" name="phone" placeholder="4084232021" />
+      <div class="field">
+        <label class="label">Latitude</label>
+        <input
+          class="input"
+          type="text"
+          name="latitude"
+          placeholder="Latitude"
+        />
+      </div>
+      <div class="field">
+        <label class="label">Longitude</label>
+        <input
+          class="input"
+          type="text"
+          name="longitude"
+          placeholder="Longitude"
+        />
+      </div>
+      <div class="field">
+        <p class="control">
+          <button type="submit" class="button is-success">
+            Register your coordinates and phone number
+          </button>
+        </p>
+      </div>
+    </form>
+  </body>
+
+  <script>
+    // stuff for the phone number input here
+    const info = document.querySelector(".alert-info");
+
+    // optional
+    function getIp(callback) {
+      fetch("https://ipinfo.io/json?token=<KEY_HERE>", {
+        headers: { Accept: "application/json" },
+      })
+        .then((resp) => resp.json())
+        .catch(() => {
+          return {
+            country: "us",
+          };
+        })
+        .then((resp) => callback(resp.country));
+    }
+
+    const phoneInputField = document.querySelector("#phone");
+    const phoneInput = window.intlTelInput(phoneInputField, {
+      // https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
+      preferredCountries: ["us", "co", "in", "de"],
+      initialCountry: "auto",
+      hiddenInput: "formatted_number",
+      geoIpLookup: getIp,
+      utilsScript:
+        "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+    });
+  </script>
+</html>
