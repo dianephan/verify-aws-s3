@@ -7,7 +7,7 @@
   </head>
   <body>
     <h1 class="title">
-      Please verify your account
+      Please verify your account {{username}}
     </h1>
     {% if error %}
       <p class=error><strong>Error:</strong> {{ error }}
@@ -15,7 +15,7 @@
     <form method="POST">
       <div class="field">
         <label class="label">Enter the code sent to your phone number.</label>
-          <input class="input" type="password" name= "verificationcode" placeholder="verificationcode">
+        <input class="input" type="password" name= "verificationcode" placeholder="verificationcode">
         </p>
       </div>
       <div class="field">
